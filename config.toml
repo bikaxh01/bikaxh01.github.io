@@ -1,6 +1,6 @@
 theme = "duckquill"
 title = "Bikash"
-base_url = "https://bikaxh01.github.io/portfolio-/"
+base_url = "https://bikaxh01.github.io/"
 description = "Opinionated, modern, pretty, and clean Zola theme."
 
 compile_sass = true

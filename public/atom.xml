@@ -1,20 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
-    <channel>
-      <title>Bikash - backend</title>
-      <link>https://bikaxh01.github.io/</link>
-      <description>Opinionated, modern, pretty, and clean Zola theme.</description>
-      <generator>Zola</generator>
-      <language>en</language>
-      <atom:link href="https://bikaxh01.github.io/tags/backend/rss.xml" rel="self" type="application/rss+xml"/>
-      <lastBuildDate>Thu, 30 Jul 2026 00:00:00 +0000</lastBuildDate>
-      <item>
-          <title>Understanding Rate Limiting</title>
-          <pubDate>Thu, 30 Jul 2026 00:00:00 +0000</pubDate>
-          <author>Duck Quack</author>
-          <link>https://bikaxh01.github.io/blog/rate-limit/</link>
-          <guid>https://bikaxh01.github.io/blog/rate-limit/</guid>
-          <description xml:base="https://bikaxh01.github.io/blog/rate-limit/">&lt;p&gt;Imagine you open a small coffee shop. Usually, customers walk in one by one, order a drink, and leave. Everything runs smoothly.&lt;&#x2F;p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>Bikash</title>
+    <subtitle>Opinionated, modern, pretty, and clean Zola theme.</subtitle>
+    <link rel="self" type="application/atom+xml" href="https://bikaxh01.github.io/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://bikaxh01.github.io/"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2026-07-30T00:00:00+00:00</updated>
+    <id>https://bikaxh01.github.io/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Understanding Rate Limiting</title>
+        <published>2026-07-30T00:00:00+00:00</published>
+        <updated>2026-07-30T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Duck Quack
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://bikaxh01.github.io/blog/rate-limit/"/>
+        <id>https://bikaxh01.github.io/blog/rate-limit/</id>
+        
+        <content type="html" xml:base="https://bikaxh01.github.io/blog/rate-limit/">&lt;p&gt;Imagine you open a small coffee shop. Usually, customers walk in one by one, order a drink, and leave. Everything runs smoothly.&lt;&#x2F;p&gt;
 &lt;p&gt;Now imagine someone walks in and places 500 orders at once. Your baristas get overwhelmed, the line spills onto the street, and regular customers leave because they can’t even get a single cup of coffee.&lt;&#x2F;p&gt;
 &lt;p&gt;On the web, your server is the coffee shop, and incoming requests are the orders. &lt;strong&gt;Rate limiting&lt;&#x2F;strong&gt; is like putting a rule at the door: &lt;em&gt;“Each customer can only place 5 orders per minute.”&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
 &lt;p&gt;Rate limiting protects your website from three big problems:&lt;&#x2F;p&gt;
@@ -186,7 +195,7 @@ If 50 students use the same university Wi-Fi, they all share one public IP addre
 &lt;li&gt;Need the simplest code with low memory? Use &lt;strong&gt;Fixed Window&lt;&#x2F;strong&gt;.&lt;&#x2F;li&gt;
 &lt;li&gt;Processing background tasks for a database? Use &lt;strong&gt;Leaky Bucket&lt;&#x2F;strong&gt; to keep work steady.&lt;&#x2F;li&gt;
 &lt;&#x2F;ul&gt;
-</description>
-      </item>
-    </channel>
-</rss>
+</content>
+        
+    </entry>
+</feed>

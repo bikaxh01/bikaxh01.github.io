@@ -30,9 +30,9 @@ smart_punctuation = true
 bottom_footnotes = true
 
 [markdown.highlighting]
-style = "inline"
-dark_theme = "material-theme-palenight"
-light_theme = "everforest-light"
+style = "class"
+light_theme = "solarized-light"
+dark_theme = "solarized-dark"
 
 
 

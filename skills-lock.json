@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "skills": {
+    "blog-writing-guide": {
+      "source": "getsentry/skills",
+      "sourceType": "github",
+      "computedHash": "b9a6d5585a901191cd159575eea1a192285055fef17294975fbe42019cf060d3"
+    }
+  }
+}

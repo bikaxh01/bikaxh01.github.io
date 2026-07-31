@@ -1,19 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>https://bikaxh01.github.io/portfolio-/</loc>
+        <loc>https://bikaxh01.github.io/</loc>
     </url>
     <url>
-        <loc>https://bikaxh01.github.io/portfolio-/blog/</loc>
+        <loc>https://bikaxh01.github.io/blog/</loc>
     </url>
     <url>
-        <loc>https://bikaxh01.github.io/portfolio-/blog/first-post/</loc>
-        <lastmod>2026-07-14</lastmod>
+        <loc>https://bikaxh01.github.io/blog/page/1/</loc>
     </url>
     <url>
-        <loc>https://bikaxh01.github.io/portfolio-/blog/page/1/</loc>
+        <loc>https://bikaxh01.github.io/blog/rate-limit/</loc>
+        <lastmod>2026-07-30</lastmod>
     </url>
     <url>
-        <loc>https://bikaxh01.github.io/portfolio-/tags/</loc>
+        <loc>https://bikaxh01.github.io/tags/</loc>
+    </url>
+    <url>
+        <loc>https://bikaxh01.github.io/tags/backend/</loc>
+    </url>
+    <url>
+        <loc>https://bikaxh01.github.io/tags/python/</loc>
+    </url>
+    <url>
+        <loc>https://bikaxh01.github.io/tags/rate-limiting/</loc>
+    </url>
+    <url>
+        <loc>https://bikaxh01.github.io/tags/system-design/</loc>
     </url>
 </urlset>

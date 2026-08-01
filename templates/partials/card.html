@@ -1,9 +1,12 @@
 {%- if page.extra.card -%}
-	{{ get_url(path=page.colocated_path ~ page.extra.card) }}
+	{%- set colocated = page.colocated_path | default(value="") -%}
+	{{ get_url(path=colocated ~ page.extra.card) }}
 {%- elif section.extra.card -%}
-	{{ get_url(path=section.colocated_path ~ section.extra.card) }}
+	{%- set colocated = section.colocated_path | default(value="") -%}
+	{{ get_url(path=colocated ~ section.extra.card) }}
 {%- elif page.extra.banner -%}
-	{%- set card = resize_image(path=page.colocated_path ~ page.extra.banner, width=1200, height=628, op="fill") -%}
+	{%- set colocated = page.colocated_path | default(value="") -%}
+	{%- set card = resize_image(path=colocated ~ page.extra.banner, width=1200, height=628, op="fill") -%}
 	{{ card.url }}
 {%- else -%}
 	{{ get_url(path="card.png") }}?v=2

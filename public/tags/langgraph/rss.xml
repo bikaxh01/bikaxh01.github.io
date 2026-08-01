@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+      <title>Bikash - langgraph</title>
+      <link>https://bikaxh01.github.io/</link>
+      <description>Opinionated, modern, pretty, and clean Zola theme.</description>
+      <generator>Zola</generator>
+      <language>en</language>
+      <atom:link href="https://bikaxh01.github.io/tags/langgraph/rss.xml" rel="self" type="application/rss+xml"/>
+      <lastBuildDate>Sat, 01 Aug 2026 00:00:00 +0000</lastBuildDate>
+      <item>
+          <title>Building a Coding Agent from First Principles (Part 1)</title>
+          <pubDate>Sat, 01 Aug 2026 00:00:00 +0000</pubDate>
+          <author>Duck Quack</author>
+          <link>https://bikaxh01.github.io/blog/building-coding-agent-part-1/</link>
+          <guid>https://bikaxh01.github.io/blog/building-coding-agent-part-1/</guid>
+          <description xml:base="https://bikaxh01.github.io/blog/building-coding-agent-part-1/">&lt;p&gt;We’ve all seen the rise of powerful AI coding assistants recently—tools like Claude Code, Codex, and the Pi agent are fundamentally changing how we write software. But under the magic, what exactly &lt;em&gt;is&lt;&#x2F;em&gt; a coding agent?&lt;&#x2F;p&gt;
+&lt;p&gt;Strip away the hype, the complex sandbox environments, and the advanced context compression algorithms, and you are left with something surprisingly simple: &lt;strong&gt;a coding agent is just an LLM given a set of tools, iterating in a loop until a task is finished.&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Everything else is just optimization.&lt;&#x2F;p&gt;
+&lt;p&gt;In this article, we’re going back to first principles. We will build a conversational, agentic coding assistant using &lt;strong&gt;LangGraph&lt;&#x2F;strong&gt; and &lt;strong&gt;LangChain&lt;&#x2F;strong&gt;. Our agent will interact with a local sandboxed directory, read files, run commands, and edit code autonomously.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;the-core-loop-reasoning-and-acting&quot;&gt;The Core Loop: Reasoning and Acting&lt;&#x2F;h2&gt;
+&lt;p&gt;The heart of our agent is a state machine. The agent loops between reasoning (the LLM deciding what to do) and acting (executing the chosen tools).&lt;&#x2F;p&gt;
+&lt;p&gt;When a user asks for a feature or a bug fix, the LLM looks at the available tools, picks the right one to gather context or make changes, and receives the output. It then evaluates if the task is complete. If not, it picks another tool.&lt;&#x2F;p&gt;
+&lt;p&gt;Here is what the architecture looks like in LangGraph:&lt;&#x2F;p&gt;
+&lt;pre class=&quot;giallo&quot; style=&quot;color: #BABED8; background-color: #292D3E;&quot;&gt;&lt;code data-lang=&quot;mermaid&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;graph TD&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;    __start__((START)) --&amp;gt; llm_node&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;    llm_node(LLM Node) --&amp;gt; condition{Should Continue?}&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;    condition -- &amp;quot;Yes (Call Tools)&amp;quot; --&amp;gt; tools(Tools Node)&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;    condition -- &amp;quot;No (Finished)&amp;quot; --&amp;gt; __end__((END))&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;    tools --&amp;gt; llm_node&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h2 id=&quot;arming-the-agent-available-tools&quot;&gt;Arming the Agent: Available Tools&lt;&#x2F;h2&gt;
+&lt;p&gt;An LLM is only as good as the tools it has access to. For a coding agent to be effective, it needs highly specific tools to manipulate the workspace efficiently.&lt;&#x2F;p&gt;
+&lt;p&gt;We equipped our agent with the following core capabilities:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;ls(path)&lt;&#x2F;code&gt;&lt;&#x2F;strong&gt;: Lists the contents of a directory. Used to explore the structure of the workspace.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;read(path)&lt;&#x2F;code&gt;&lt;&#x2F;strong&gt;: Reads the contents of a specific file.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;find(pattern, path)&lt;&#x2F;code&gt;&lt;&#x2F;strong&gt;: Locates files by name or using glob patterns.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;grep(pattern, path)&lt;&#x2F;code&gt;&lt;&#x2F;strong&gt;: Searches for specific text or regular expressions across multiple files.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;write(path, content)&lt;&#x2F;code&gt;&lt;&#x2F;strong&gt;: Creates a brand new file or completely overwrites an existing one.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;edit(path, old_string, new_string)&lt;&#x2F;code&gt;&lt;&#x2F;strong&gt;: Modifies an existing file using an exact substring search-and-replace. This is safer and more precise for LLMs than line-number based editing.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;bash(command)&lt;&#x2F;code&gt;&lt;&#x2F;strong&gt;: Executes a shell command inside the workspace (e.g., running tests, compiling code, or installing dependencies).&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;seeing-it-in-action&quot;&gt;Seeing It in Action&lt;&#x2F;h2&gt;
+&lt;p&gt;With LangGraph managing the state and our tools firmly in place, the agent can maintain persistent in-memory checkpoints for multi-turn conversations.&lt;&#x2F;p&gt;
+&lt;p&gt;Here’s how you can run this basic implementation locally:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;Set your environment variables in &lt;code&gt;.env&lt;&#x2F;code&gt; (like your OpenAI or Anthropic API keys).&lt;&#x2F;li&gt;
+&lt;li&gt;Run the agent using &lt;code&gt;uv&lt;&#x2F;code&gt; (a fast Python package installer and resolver):&lt;pre class=&quot;giallo&quot; style=&quot;color: #BABED8; background-color: #292D3E;&quot;&gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #FFCB6B;&quot;&gt;uv&lt;&#x2F;span&gt;&lt;span style=&quot;color: #C3E88D;&quot;&gt; run main.py&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;Type your requests into the terminal. The agent will execute tools automatically and stream its responses.&lt;&#x2F;li&gt;
+&lt;li&gt;Type &lt;code&gt;exit&lt;&#x2F;code&gt; to quit the interactive loop and view the session summary.&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;h2 id=&quot;what-s-next&quot;&gt;What’s Next?&lt;&#x2F;h2&gt;
+&lt;p&gt;We’ve covered the absolute basics: give an LLM some tools and put it in a loop. But this naive approach quickly runs into limitations in the real world.&lt;&#x2F;p&gt;
+&lt;p&gt;What happens when the output of &lt;code&gt;grep&lt;&#x2F;code&gt; is too large for the context window? How do we prevent the agent from running destructive &lt;code&gt;bash&lt;&#x2F;code&gt; commands? How do we help it navigate a massive monorepo without getting lost?&lt;&#x2F;p&gt;
+&lt;p&gt;In &lt;strong&gt;Part 2&lt;&#x2F;strong&gt;, we will take this foundational agent and improve it. We’ll dive into the critical optimizations that make production-grade coding agents actually useful: context window management, output truncation, safer sandboxing, and self-correction mechanisms.&lt;&#x2F;p&gt;
+&lt;p&gt;Stay tuned!&lt;&#x2F;p&gt;
+</description>
+      </item>
+    </channel>
+</rss>

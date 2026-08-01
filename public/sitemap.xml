@@ -7,6 +7,10 @@
         <loc>https://bikaxh01.github.io/blog/</loc>
     </url>
     <url>
+        <loc>https://bikaxh01.github.io/blog/building-coding-agent-part-1/</loc>
+        <lastmod>2026-08-01</lastmod>
+    </url>
+    <url>
         <loc>https://bikaxh01.github.io/blog/page/1/</loc>
     </url>
     <url>
@@ -17,7 +21,19 @@
         <loc>https://bikaxh01.github.io/tags/</loc>
     </url>
     <url>
+        <loc>https://bikaxh01.github.io/tags/agents/</loc>
+    </url>
+    <url>
+        <loc>https://bikaxh01.github.io/tags/ai/</loc>
+    </url>
+    <url>
         <loc>https://bikaxh01.github.io/tags/backend/</loc>
+    </url>
+    <url>
+        <loc>https://bikaxh01.github.io/tags/engineering/</loc>
+    </url>
+    <url>
+        <loc>https://bikaxh01.github.io/tags/langgraph/</loc>
     </url>
     <url>
         <loc>https://bikaxh01.github.io/tags/rate-limiting/</loc>

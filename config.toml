@@ -75,7 +75,9 @@ accent_color_dark = "#ffa348"
 # Additional JavaScript scripts; expects them to be in the "./static/" directory.
 #
 scripts = [
-  "boot-terminal.js"
+  "boot-terminal.js",
+  "mermaid.min.js",
+  "mermaid-init.js"
 ]
 #
 # Whether to show "copy code" button on all code blocks

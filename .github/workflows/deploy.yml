@@ -22,3 +22,4 @@ jobs:
           PAGES_BRANCH: gh-pages
           # Provide personal access token
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BUILD_VERSION: "0.22.0"

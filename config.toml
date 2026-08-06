@@ -67,10 +67,9 @@ accent_color_dark = "#ffa348"
 # Additional CSS styles; expects them to be in the "./static/" directory.
 # If you are using Sass it will be generated there automatically.
 #
-# styles = [
-#   "YOUR_STYLE.css",
-#   "ALSO_YOUR_STYLE.css"
-# ]
+styles = [
+  "giallo.css"
+]
 #
 # Additional JavaScript scripts; expects them to be in the "./static/" directory.
 #

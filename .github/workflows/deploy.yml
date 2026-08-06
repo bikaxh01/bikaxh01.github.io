@@ -5,18 +5,24 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
+    permissions:
+      contents: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           submodules: true
+          persist-credentials: false
 
       - name: Build and deploy
-        uses: shalzz/zola-deploy-action@v0.22.0
+        uses: shalzz/zola-deploy-action@7b80b99bba8d761a6cad869bf20c64ee0ca1cc0e # v0.22.0
         env:
           # Target branch
           PAGES_BRANCH: gh-pages

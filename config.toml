@@ -121,12 +121,12 @@ show_backlinks = false
 # it can break some stuff, in which case you will need to set custom policy.
 csp = [
 	{ directive = "font-src", domains = ["'self'"] },
-	{ directive = "img-src", domains = ["'self'", "https:", "data:"] },
-	{ directive = "media-src", domains = ["'self'", "https:"] },
+	{ directive = "img-src", domains = ["'self'", "data:"] },
+	{ directive = "media-src", domains = ["'self'"] },
 	{ directive = "script-src", domains = ["'self'"] },
 	{ directive = "style-src", domains = ["'self'", "'unsafe-inline'"] },
-	{ directive = "frame-src", domains = ["https://player.vimeo.com", "https://www.youtube-nocookie.com", "https://toot.community"] },
-	{ directive = "connect-src", domains = ["https://toot.community"] },
+	{ directive = "frame-src", domains = ["'none'"] },
+	{ directive = "object-src", domains = ["'none'"] },
 	{ directive = "base-uri", domains = ["'none'"] },
 	{ directive = "form-action", domains = ["'none'"] }
 ]
@@ -184,22 +184,19 @@ show_source = false
 #
 # These variables are also used for Mastodon verification,
 # the needed rel="me" link is set in the head based on these.
-[extra.comments]
-# Your Mastodon API host; instance that you have an account on.
-host = "vmst.io"
-# Your Mastodon username; used to determine who the original poster is.
-user = "daudix"
-# Whether to show the QR code to Mastodon post
-show_qr = true
+# Set both to an account you own before enabling.
+#
+# [extra.comments]
+# host = "YOUR_MASTODON_HOST"
+# user = "YOUR_MASTODON_USER"
+# show_qr = true
 
 # GoatCounter analytics; enabled only if present in config.
-[extra.goatcounter]
-# Your GoatCounter server; goatcounter.com is used by default.
+# Set this to an account you own before enabling.
 #
+# [extra.goatcounter]
 # host = "YOUR_SERVER"
-#
-# Your GoatCounter username
-user = "duckquill"
+# user = "YOUR_GOATCOUNTER_USER"
 
 [extra.debug]
 # Display outlines around all elements for debugging purposes
